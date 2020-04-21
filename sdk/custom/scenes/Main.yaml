@@ -1,0 +1,5 @@
+intentEvents:
+- intent: notifications
+  transitionToScene: Main_Notifications
+- intent: updates
+  transitionToScene: Main_DailyUpdates

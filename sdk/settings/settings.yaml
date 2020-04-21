@@ -1,0 +1,10 @@
+defaultLocale: en
+localizedSettings:
+  developerEmail: example@example.com
+  developerName: Example Developer Name
+  fullDescription: This action demonstrates Interactive Canvas.
+  privacyPolicyUrl: https://example.com
+  sampleInvocations:
+  - talk to my interactive canvas test
+  shortDescription: Interactive Canvas test action.
+projectId: <PROJECT_ID>

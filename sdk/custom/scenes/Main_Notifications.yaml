@@ -1,0 +1,40 @@
+conditionalEvents:
+- condition: scene.slots.status == "FINAL" && session.params.NotificationsSlot_notification_trigger.permissionStatus
+    == "PERMISSION_GRANTED"
+  handler:
+    staticPrompt:
+      candidates:
+      - promptResponse:
+          firstSimple:
+            variants:
+            - speech: Great, I'll notify you whenever there's a class cancelation.
+                Can I help you with anything else?
+          suggestions:
+          - title: Ask about hours
+          - title: Learn about classes
+    webhookHandler: subscribe_to_notifications
+- condition: scene.slots.status == "FINAL" && session.params.NotificationsSlot_notification_trigger.permissionStatus
+    != "PERMISSION_GRANTED"
+  handler:
+    staticPrompt:
+      candidates:
+      - promptResponse:
+          firstSimple:
+            variants:
+            - speech: Okay, I won't send you notifications about class cancelations.
+                Can I help you with anything else?
+          suggestions:
+          - title: Ask about hours
+          - title: Learn about classes
+slots:
+- commitBehavior:
+    writeSessionParam: NotificationsSlot_notification_trigger
+  config:
+    intent:
+      intentName: notification_trigger
+  defaultValue:
+    sessionParam: NotificationsSlot_notification_trigger
+  name: NotificationsSlot_notification_trigger
+  required: true
+  type:
+    name: actions.type.Notifications

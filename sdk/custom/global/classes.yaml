@@ -1,0 +1,3 @@
+handler:
+  webhookHandler: classes
+transitionToScene: Main

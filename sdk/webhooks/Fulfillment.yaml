@@ -1,0 +1,6 @@
+handlers:
+- name: cancel_class
+- name: classes
+- name: subscribe_to_notifications
+inlineCloudFunction:
+  executeFunction: ActionsOnGoogleFulfillment

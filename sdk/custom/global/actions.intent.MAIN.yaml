@@ -1,0 +1,13 @@
+handler:
+  staticPrompt:
+    candidates:
+    - promptResponse:
+        firstSimple:
+          variants:
+          - speech: Welcome to Action Gym, your local gym here to support your health
+              goals. You can ask me about our hours or what classes we offer each
+              day.
+        suggestions:
+        - title: Ask about hours
+        - title: Learn about classes
+transitionToScene: Main

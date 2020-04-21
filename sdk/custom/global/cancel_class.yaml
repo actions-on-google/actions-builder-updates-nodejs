@@ -1,0 +1,3 @@
+handler:
+  webhookHandler: cancel_class
+transitionToScene: actions.scene.END_CONVERSATION

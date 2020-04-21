@@ -1,0 +1,13 @@
+parameters:
+- name: day
+  type:
+    name: day
+trainingPhrases:
+- Learn about classes
+- ($day 'wednesday' auto=true) classes
+- classes on ($day 'tuesdays' auto=true)
+- what classes are on ($day 'Monday' auto=true)?
+- what classes are on ($day 'Friday' auto=true)
+- tell me about your classes
+- class
+- classes

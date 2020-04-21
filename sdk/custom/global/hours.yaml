@@ -1,0 +1,11 @@
+handler:
+  staticPrompt:
+    candidates:
+    - promptResponse:
+        firstSimple:
+          variants:
+          - speech: Our free weights and machines are available from 5am - 10pm, seven
+              days a week. Can I help you with anything else?
+        suggestions:
+        - title: Learn about classes
+transitionToScene: Main

@@ -1,0 +1,6 @@
+custom:
+  actions.intent.MAIN: {}
+  cancel_class: {}
+  classes: {}
+  hours: {}
+  notification_trigger: {}

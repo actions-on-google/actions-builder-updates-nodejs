@@ -1,0 +1,31 @@
+synonym:
+  entities:
+    Friday:
+      synonyms:
+      - Friday
+      - Fridays
+    Monday:
+      synonyms:
+      - Monday
+      - Mondays
+    Saturday:
+      synonyms:
+      - Saturday
+      - Saturdays
+    Sunday:
+      synonyms:
+      - Sunday
+      - Sundays
+    Thursday:
+      synonyms:
+      - Thursday
+      - Thursdays
+    Tuesday:
+      synonyms:
+      - Tuesday
+      - Tuesdays
+    Wednesday:
+      synonyms:
+      - Wednesday
+      - Wednesdays
+  matchType: EXACT_MATCH

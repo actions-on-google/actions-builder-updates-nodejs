@@ -1,0 +1,39 @@
+conditionalEvents:
+- condition: scene.slots.status == "FINAL" && session.params.DailyUpdatesSlot_classes.status
+    == "OK"
+  handler:
+    staticPrompt:
+      candidates:
+      - promptResponse:
+          firstSimple:
+            variants:
+            - speech: Gotcha, I'll send you an update everyday with the list of classes.
+                Can I help you with anything else?
+          suggestions:
+          - title: Ask about hours
+          - title: Learn about classes
+- condition: scene.slots.status == "FINAL" && session.params.DailyUpdatesSlot_classes.status
+    == "CANCELLED"
+  handler:
+    staticPrompt:
+      candidates:
+      - promptResponse:
+          firstSimple:
+            variants:
+            - speech: I won't send you daily reminders. Can I help you with anything
+                else?
+          suggestions:
+          - title: Ask about hours
+          - title: Learn about classes
+slots:
+- commitBehavior:
+    writeSessionParam: DailyUpdatesSlot_classes
+  config:
+    intent:
+      intentName: classes
+  defaultValue:
+    sessionParam: DailyUpdatesSlot_classes
+  name: DailyUpdatesSlot_classes
+  required: true
+  type:
+    name: actions.type.DailyUpdates
