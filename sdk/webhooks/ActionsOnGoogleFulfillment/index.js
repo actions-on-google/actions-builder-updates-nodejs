@@ -1,13 +1,33 @@
+/**
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 const {
   conversation,
   Suggestion,
-} = require('actions-on-google');
+} = require('@assistant/conversation');
 const functions = require('firebase-functions');
-const {auth} = require('google-auth-library');
+const {GoogleAuth} = require('google-auth-library');
 const request = require('request');
 const util = require('util');
 
-const SERVICE_ACCOUNT_KEY = require('./service-account.json');
+// Use the Actions API to send a Google Assistant push notification.
+const auth = new GoogleAuth({
+  scopes: 'https://www.googleapis.com/auth/actions.fulfillment.conversation'
+});
+let client;
 
 // Days of the week
 const DAYS = [
@@ -213,7 +233,7 @@ async function sendPushNotification(accessToken, notification) {
   return response;
 }
 
-const app = conversation();
+const app = conversation({debug: true});
 
 app.handle('classes', (conv) => {
   const day = conv.intent.params.day ?
@@ -250,13 +270,15 @@ app.handle('subscribe_to_notifications', (conv) => {
 
 // Trigger a test push notification mid-conversation
 app.handle('cancel_class', async (conv) => {
-  const client = auth.fromJSON(SERVICE_ACCOUNT_KEY);
-  // Use the Actions API to send a Google Assistant push notification.
-  client.scopes = ['https://www.googleapis.com/auth/actions.fulfillment.conversation'];
+  // Lazy-load client
+  // See https://github.com/googleapis/google-auth-library-nodejs/issues/798
+  if (!client) {
+    client = await auth.getClient()
+  }
 
-  let tokens;
+  let accessToken;
   try {
-    tokens = await client.authorize();
+    accessToken = await client.getAccessToken();
   } catch(err) {
     throw new Error(`Auth error: ${err}`);
   }
@@ -273,7 +295,7 @@ app.handle('cancel_class', async (conv) => {
           intent: subscription.intent,
         },
       };
-      return sendPushNotification(tokens.access_token, notification);
+      return sendPushNotification(accessToken, notification);
     });
   try {
     await Promise.all(notificationPromises);
