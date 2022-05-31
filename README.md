@@ -1,5 +1,8 @@
 # Actions on Google: Daily Updates and Push Notifications Sample
 
+*:warning: Warning: Conversational Actions will be deprecated on June 13, 2023. For more information, see [Conversational Actions Sunset](https://goo.gle/ca-sunset).*
+
+
 This sample demonstrates the daily updates and push notifications for Google Assistant Actions.
 
 ### Prerequisites
